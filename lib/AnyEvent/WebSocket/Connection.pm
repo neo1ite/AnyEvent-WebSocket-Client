@@ -12,13 +12,13 @@ use PerlX::Maybe qw( maybe provided );
 use Carp ();
 
 # ABSTRACT: WebSocket connection for AnyEvent
-# VERSION
+our $VERSION = '0.39'; # VERSION
 
 =head1 SYNOPSIS
 
  # send a message through the websocket...
  $connection->send('a message');
- 
+
  # recieve message from the websocket...
  $connection->on(each_message => sub {
    # $connection is the same connection object
@@ -26,34 +26,34 @@ use Carp ();
    my($connection, $message) = @_;
    ...
  });
- 
+
  # handle a closed connection...
  $connection->on(finish => sub {
    # $connection is the same connection object
    my($connection) = @_;
    ...
  });
- 
+
  # close an opened connection
  # (can do this either inside or outside of
  # a callback)
  $connection->close;
 
-(See L<AnyEvent::WebSocket::Client> or L<AnyEvent::WebSocket::Server> on 
+(See L<AnyEvent::WebSocket::Client> or L<AnyEvent::WebSocket::Server> on
 how to create a connection)
 
 =head1 DESCRIPTION
 
-This class represents a WebSocket connection with a remote server or a 
+This class represents a WebSocket connection with a remote server or a
 client.
 
-If the connection object falls out of scope then the connection will be 
+If the connection object falls out of scope then the connection will be
 closed gracefully.
 
-This class was created for a client to connect to a server via 
-L<AnyEvent::WebSocket::Client>, and was later extended to work on the 
-server side via L<AnyEvent::WebSocket::Server>.  Once a WebSocket 
-connection is established, the API for both client and server is 
+This class was created for a client to connect to a server via
+L<AnyEvent::WebSocket::Client>, and was later extended to work on the
+server side via L<AnyEvent::WebSocket::Server>.  Once a WebSocket
+connection is established, the API for both client and server is
 identical.
 
 =head1 ATTRIBUTES
@@ -134,10 +134,10 @@ sub BUILD
 {
   my $self = shift;
   Scalar::Util::weaken $self;
-  
+
   my @temp_messages = ();
   my $are_callbacks_supposed_to_be_ready = 0;
-  
+
   my $finish = sub {
     my $strong_self = $self; # preserve $self because otherwise $self can be destroyed in the callbacks.
     return if $self->_is_finished;
@@ -205,7 +205,7 @@ sub BUILD
   # situation in TLS mode, because on_eof can fire even if we don't
   # have any on_read (
   # https://metacpan.org/pod/AnyEvent::Handle#I-get-different-callback-invocations-in-TLS-mode-Why-cant-I-pause-reading
-  # )   
+  # )
   $self->handle->on_read($read_cb);
   my $idle_w; $idle_w = AE::idle sub {
     undef $idle_w;
@@ -232,7 +232,7 @@ sub _process_message
 {
   my ($self, $received_message) = @_;
   return if !$self->_is_read_open;
-  
+
   if($received_message->is_text || $received_message->is_binary)
   {
     $_->($self, $received_message) for @{ $self->_next_message_cb };
@@ -274,9 +274,9 @@ sub send
 {
   my($self, $message) = @_;
   my $frame;
-  
+
   return $self if !$self->_is_write_open;
-  
+
   if(ref $message)
   {
     $frame = Protocol::WebSocket::Frame->new(buffer => $message->body, masked => $self->masked, max_payload_size => 0);
@@ -333,7 +333,7 @@ Called when the connection is terminated
 sub on
 {
   my($self, $event, $cb) = @_;
-  
+
   if($event eq 'next_message')
   {
     push @{ $self->_next_message_cb }, $cb;
@@ -432,4 +432,3 @@ Joaquín José
 =end stopwords
 
 =cut
-

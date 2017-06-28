@@ -6,7 +6,7 @@ use Moo;
 use Encode ();
 
 # ABSTRACT: WebSocket message for AnyEvent
-# VERSION
+our $VERSION = '0.39'; # VERSION
 
 =head1 SYNOPSIS
 

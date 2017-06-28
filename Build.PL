@@ -19,46 +19,46 @@ my %module_build_args = (
   },
   "configure_requires" => {
     "Module::Build" => "0.28",
-    "perl" => "5.006"
+    "perl"          => "5.006"
   },
   "dist_abstract" => "WebSocket client for AnyEvent",
   "dist_author" => [
     "Graham Ollis <plicease\@cpan.org>"
   ],
-  "dist_name" => "AnyEvent-WebSocket-Client",
-  "dist_version" => "0.38",
-  "license" => "perl",
-  "module_name" => "AnyEvent::WebSocket::Client",
+  "dist_name"       => "AnyEvent-WebSocket-Client",
+  "dist_version"    => "0.39",
+  "license"         => "perl",
+  "module_name"     => "AnyEvent::WebSocket::Client",
   "recommends" => {
-    "EV" => 0,
-    "IO::Socket::SSL" => 0,
-    "Math::Random::Secure" => 0,
-    "Net::SSLeay" => 0,
-    "PerlX::Maybe::XS" => 0
+    "EV"                    => 0,
+    "IO::Socket::SSL"       => 0,
+    "Math::Random::Secure"  => 0,
+    "Net::SSLeay"           => 0,
+    "PerlX::Maybe::XS"      => 0
   },
   "recursive_test_files" => 1,
   "requires" => {
-    "AnyEvent" => 0,
-    "Moo" => "2.0",
-    "PerlX::Maybe" => "0.003",
-    "Protocol::WebSocket" => "0.20",
-    "URI" => "1.53",
-    "URI::ws" => 0,
-    "perl" => "5.008"
+    "AnyEvent"              => 0,
+    "Moo"                   => "2.0",
+    "PerlX::Maybe"          => "0.003",
+    "Protocol::WebSocket"   => "0.20",
+    "URI"                   => "1.53",
+    "URI::ws"               => 0,
+    "perl"                  => "5.008"
   },
   "test_requires" => {
-    "Protocol::WebSocket" => "0.20",
-    "Test::More" => "0.94",
-    "perl" => "5.008"
+    "Protocol::WebSocket"   => "0.20",
+    "Test::More"            => "0.94",
+    "perl"                  => "5.008"
   }
 );
 
 
 my %fallback_build_requires = (
-  "Module::Build" => "0.28",
+  "Module::Build"       => "0.28",
   "Protocol::WebSocket" => "0.20",
-  "Test::More" => "0.94",
-  "perl" => "5.008"
+  "Test::More"          => "0.94",
+  "perl"                => "5.008"
 );
 
 
